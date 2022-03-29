@@ -1,14 +1,16 @@
 const router = require("express").Router();
 const {
-    student,
-    studentResult,
-    resultStatus,
+    addStudent,
+    studentResultById,
+    getResultStatus,
     csvUpload,
+    getAllStudents,
 } = require("../controllers/routesController");
 
-router.post("/students", student);
-router.get("/students/:id/result", studentResult);
-router.get("/students", resultStatus);
+router.get("/students/:id/result", studentResultById);
+router.get("/students", getResultStatus);
+router.get("/allStudents", getAllStudents);
+router.post("/students", addStudent);
 router.post("/upload", csvUpload);
 
 module.exports = router;

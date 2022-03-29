@@ -2,8 +2,24 @@ const Student = require("../models/studentModel");
 const mongoose = require("mongoose");
 const csvtojson = require("csvtojson");
 const studentSchema = require("../validators");
+const NodeCache = require("node-cache");
 
-const student = async (req, res) => {
+const myCache = new NodeCache({ stdTTL: 10, deleteOnExpire: true });
+
+const getAllStudents = async (req, res) => {
+    try {
+        let student = myCache.get("students");
+        if (!student) {
+            student = await Student.find({});
+            myCache.set("students", student, 60000);
+        }
+        res.status(200).json({ student });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const addStudent = async (req, res) => {
     const { error } = studentSchema.validate(req.body);
     if (error) return res.status(400).send(error.details[0]);
     try {
@@ -41,7 +57,7 @@ const csvUpload = async (req, res) => {
     }
 };
 
-const studentResult = async (req, res) => {
+const studentResultById = async (req, res) => {
     try {
         const id = req.params.id;
         if (mongoose.Types.ObjectId.isValid(id)) {
@@ -61,7 +77,7 @@ const studentResult = async (req, res) => {
     }
 };
 
-const resultStatus = async (req, res) => {
+const getResultStatus = async (req, res) => {
     try {
         const search = req.query.resultStatus;
         var students = await Student.find({});
@@ -78,4 +94,10 @@ const resultStatus = async (req, res) => {
     }
 };
 
-module.exports = { student, csvUpload, studentResult, resultStatus };
+module.exports = {
+    addStudent,
+    csvUpload,
+    studentResultById,
+    getResultStatus,
+    getAllStudents,
+};
