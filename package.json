@@ -2,13 +2,13 @@
   "name": "studentresultapi",
   "version": "1.0.0",
   "description": "Apis to get student result",
-  "main": "dist/app.js",
+  "main": "dist/bootstrap.js",
   "type": "module",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "dev": "tsx watch src/app.ts",
+    "dev": "tsx watch src/bootstrap.ts",
     "build": "tsc && cp -R src/data dist/data",
-    "start": "node dist/app.js"
+    "start": "node dist/bootstrap.js"
   },
   "author": "Divyat Samadhiya",
   "license": "ISC",

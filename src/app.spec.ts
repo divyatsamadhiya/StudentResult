@@ -93,7 +93,7 @@ test("startServer connects and listens", async () => {
   process.env.NODE_ENV = "test";
   process.env.MONGO_URI = "mongodb://test";
 
-  const { startServer } = await import("./app.js");
+  const { startServer } = await import("./bootstrap.js");
   await startServer();
   expect(connectDB).toHaveBeenCalledWith("mongodb://test");
   expect(listen).toHaveBeenCalled();
