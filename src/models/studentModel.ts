@@ -7,6 +7,17 @@ const studentSchema = new Schema({
     minlength: 6,
     maxlength: 20,
   },
+  email: {
+    type: String,
+    required: [true, "Please provide the email"],
+    unique: true,
+    lowercase: true,
+    trim: true,
+  },
+  passwordHash: {
+    type: String,
+    required: [true, "Please provide the password hash"],
+  },
   age: {
     type: Number,
   },

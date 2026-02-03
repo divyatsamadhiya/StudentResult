@@ -3,6 +3,8 @@ import studentSchema from "./studentSchema.js";
 test("student schema validates good payload", () => {
   const { error } = studentSchema.validate({
     name: "Student",
+    email: "student@example.com",
+    password: "secret123",
     age: 20,
     mark1: 50,
     mark2: 45,

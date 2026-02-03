@@ -1,3 +1,3 @@
-name,age,mark1,mark2,mark3
-Rohit Upadhyay,25,42,42,20
-Aman Tiwari,23,87,45,65
+name,email,password,age,mark1,mark2,mark3
+Rohit Upadhyay,rohit@example.com,secret123,25,42,42,20
+Aman Tiwari,aman@example.com,secret123,23,87,45,65

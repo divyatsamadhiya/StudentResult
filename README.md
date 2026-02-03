@@ -4,11 +4,13 @@ A TypeScript + Express API for managing student records and computing pass/fail 
 
 ## Features
 
-- Create student records
-- Upload students from CSV
-- Fetch all students
-- Filter students by pass/fail
-- Get a single student’s result by ID
+- Admin login and student login using JWT
+- Bootstrap admin creation (first admin can be created without auth)
+- Create student records (admin only)
+- Upload students from CSV (admin only)
+- Fetch all students (admin only)
+- Filter students by pass/fail (admin only)
+- Students can view their own result after login
 
 ## Tech Stack
 
@@ -17,6 +19,7 @@ A TypeScript + Express API for managing student records and computing pass/fail 
 - Express
 - MongoDB + Mongoose
 - Joi validation
+- JWT auth
 - Jest (unit tests)
 - Prettier (formatting)
 
@@ -29,16 +32,23 @@ src/
     db.ts
     env.ts
   controllers/
+    auth/
     students/
   data/
     students.csv
+  middlewares/
+    auth.ts
   models/
+    adminModel.ts
     studentModel.ts
   routes/
+    authRoutes.ts
     studentRoutes.ts
   services/
+    auth/
     students/
   validators/
+    authSchema.ts
     studentSchema.ts
 ```
 
@@ -56,6 +66,8 @@ npm install
 MONGO_URI=<your MongoDB connection string>
 PORT=3000
 NODE_ENV=development
+JWT_SECRET=<your secret>
+JWT_EXPIRES_IN=30m
 ```
 
 3. Run in development (TypeScript watch):
@@ -71,17 +83,56 @@ npm run build
 npm start
 ```
 
+## Admin Setup
+
+Admins are stored in MongoDB. The first admin can be created via the bootstrap endpoint without authentication. After the first admin exists, only admins can create new admins.
+
 ## API Endpoints
 
 Base URL: `http://localhost:3000/api/v1`
 
-### Add Student
+### Admin Register (Bootstrap/Admin)
+
+**POST** `/auth/admin/register`
+
+```json
+{
+  "email": "admin@example.com",
+  "password": "secret123"
+}
+```
+
+### Admin Login
+
+**POST** `/auth/admin/login`
+
+```json
+{
+  "email": "admin@example.com",
+  "password": "secret123"
+}
+```
+
+### Student Login
+
+**POST** `/auth/student/login`
+
+```json
+{
+  "email": "student@example.com",
+  "password": "secret123"
+}
+```
+
+### Add Student (Admin)
 
 **POST** `/students`
 
 ```json
 {
   "name": "Student Name",
+  "email": "student@example.com",
+  "password": "secret123",
   "age": 20,
   "mark1": 50,
   "mark2": 45,
@@ -89,17 +140,17 @@ Base URL: `http://localhost:3000/api/v1`
 }
 ```
 
-### Get All Students
+### Get All Students (Admin)
 
 **GET** `/allStudents`
 
-### Get Students By Result
+### Get Students By Result (Admin)
 
 **GET** `/students?resultStatus=passed`
 
 **GET** `/students?resultStatus=failed`
 
-### Get Student Result By ID
+### Get Student Result By ID (Student/Admin)
 
 **GET** `/students/:id/result`
 
@@ -115,9 +166,19 @@ Response example:
 }
 ```
 
-### Upload Students From CSV
+### Upload Students From CSV (Admin)
 
 **POST** `/upload`
+
+CSV must include: `name,email,password,age,mark1,mark2,mark3`
+
+## Auth Header
+
+For protected routes, send:
+
+```
+Authorization: Bearer <token>
+```
 
 ## Tests
 
@@ -141,7 +202,7 @@ Import the collection:
 
 - `StudentResult.postman_collection.json`
 
-Update the `baseUrl` variable if your port changes.
+Update the `baseUrl`, `adminToken`, and `studentToken` variables as needed.
 
 ## Notes
 

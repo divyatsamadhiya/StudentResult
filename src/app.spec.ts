@@ -29,7 +29,12 @@ test("createApp configures express app", async () => {
   }));
 
   jest.unstable_mockModule("./routes/studentRoutes.js", () => ({
-    default: "router",
+    default: "student-router",
+    __esModule: true,
+  }));
+
+  jest.unstable_mockModule("./routes/authRoutes.js", () => ({
+    default: "auth-router",
     __esModule: true,
   }));
 
@@ -74,7 +79,12 @@ test("startServer connects and listens", async () => {
   }));
 
   jest.unstable_mockModule("./routes/studentRoutes.js", () => ({
-    default: "router",
+    default: "student-router",
+    __esModule: true,
+  }));
+
+  jest.unstable_mockModule("./routes/authRoutes.js", () => ({
+    default: "auth-router",
     __esModule: true,
   }));
 

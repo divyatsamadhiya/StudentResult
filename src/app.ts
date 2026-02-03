@@ -1,5 +1,6 @@
 import express from "express";
 import connectDB from "./configs/db.js";
+import authRouter from "./routes/authRoutes.js";
 import studentRouter from "./routes/studentRoutes.js";
 import "./configs/env.js";
 
@@ -7,6 +8,7 @@ export const createApp = () => {
   const app = express();
 
   app.use(express.json());
+  app.use("/api/v1/auth", authRouter);
   app.use("/api/v1", studentRouter);
 
   return app;

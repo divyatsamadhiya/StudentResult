@@ -44,7 +44,13 @@ test("addStudentController creates student", async () => {
   }));
 
   const controller = (await import("./addStudentController.js")).default;
-  const req = { body: { name: "Student" } } as any;
+  const req = {
+    body: {
+      name: "Student",
+      email: "student@example.com",
+      password: "secret123",
+    },
+  } as any;
   const res = {
     status: jest.fn().mockReturnThis(),
     send: jest.fn(),
