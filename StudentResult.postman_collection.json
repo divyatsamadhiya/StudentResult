@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "Student Result API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Student Result API"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Add Student",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["students"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Name\": \"Student Name\",\n  \"Age\": 20,\n  \"Mark1\": 50,\n  \"Mark2\": 45,\n  \"Mark3\": 50\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Students",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/allStudents",
+          "host": ["{{baseUrl}}"],
+          "path": ["allStudents"]
+        }
+      }
+    },
+    {
+      "name": "Get Students By Result (passed)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/students?resultStatus=passed",
+          "host": ["{{baseUrl}}"],
+          "path": ["students"],
+          "query": [
+            {
+              "key": "resultStatus",
+              "value": "passed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Students By Result (failed)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/students?resultStatus=failed",
+          "host": ["{{baseUrl}}"],
+          "path": ["students"],
+          "query": [
+            {
+              "key": "resultStatus",
+              "value": "failed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Student Result By Id",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/students/:id/result",
+          "host": ["{{baseUrl}}"],
+          "path": ["students", ":id", "result"]
+        }
+      }
+    },
+    {
+      "name": "Upload CSV",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "{{baseUrl}}/upload",
+          "host": ["{{baseUrl}}"],
+          "path": ["upload"]
+        }
+      }
+    }
+  ]
+}
