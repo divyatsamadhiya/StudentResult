@@ -2,7 +2,7 @@ import { jest } from "@jest/globals";
 
 test("getAllStudents fetches and caches", async () => {
   jest.resetModules();
-  const find = jest.fn(async () => [{ Name: "Student" }]);
+  const find = jest.fn(async () => [{ name: "Student" }]);
   const get = jest.fn(() => undefined);
   const set = jest.fn();
 
@@ -20,5 +20,5 @@ test("getAllStudents fetches and caches", async () => {
   const result = await getAllStudents();
   expect(find).toHaveBeenCalled();
   expect(set).toHaveBeenCalled();
-  expect(result).toEqual([{ Name: "Student" }]);
+  expect(result).toEqual([{ name: "Student" }]);
 });

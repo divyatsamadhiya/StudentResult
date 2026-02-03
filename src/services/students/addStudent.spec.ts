@@ -2,7 +2,7 @@ import { jest } from "@jest/globals";
 
 test("addStudent delegates to Student.create and clears cache", async () => {
   jest.resetModules();
-  const create = jest.fn(async () => ({ Name: "Student" }));
+  const create = jest.fn(async () => ({ name: "Student" }));
   const del = jest.fn();
 
   jest.unstable_mockModule("./cache.js", () => ({
@@ -16,7 +16,7 @@ test("addStudent delegates to Student.create and clears cache", async () => {
   }));
 
   const addStudent = (await import("./addStudent.js")).default;
-  const payload = { Name: "Student", Mark1: 50, Mark2: 50, Mark3: 50 };
+  const payload = { name: "Student", mark1: 50, mark2: 50, mark3: 50 };
   await addStudent(payload);
   expect(create).toHaveBeenCalledWith(payload);
   expect(del).toHaveBeenCalledWith("students");

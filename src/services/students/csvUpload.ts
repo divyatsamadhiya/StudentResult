@@ -19,11 +19,11 @@ const csvUpload = async () => {
   const source = await csvtojson().fromFile(studentsCsvPath);
   for (let i = 0; i < source.length; i++) {
     const oneRow = {
-      Name: source[i]["Name"],
-      Age: source[i]["Age"],
-      Mark1: source[i]["Mark1"],
-      Mark2: source[i]["Mark2"],
-      Mark3: source[i]["Mark3"],
+      name: source[i]["name"] ?? source[i]["Name"],
+      age: source[i]["age"] ?? source[i]["Age"],
+      mark1: source[i]["mark1"] ?? source[i]["Mark1"],
+      mark2: source[i]["mark2"] ?? source[i]["Mark2"],
+      mark3: source[i]["mark3"] ?? source[i]["Mark3"],
     };
     studentArr.push(oneRow);
   }

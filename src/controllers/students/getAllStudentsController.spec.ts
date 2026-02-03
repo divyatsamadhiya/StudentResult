@@ -2,7 +2,7 @@ import { jest } from "@jest/globals";
 
 test("getAllStudentsController returns students", async () => {
   jest.resetModules();
-  const getAllStudents = jest.fn(async () => [{ Name: "A" }]);
+  const getAllStudents = jest.fn(async () => [{ name: "A" }]);
 
   jest.unstable_mockModule("../../services/students/getAllStudents.js", () => ({
     default: getAllStudents,

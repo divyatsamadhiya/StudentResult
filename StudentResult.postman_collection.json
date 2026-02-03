@@ -28,7 +28,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"Name\": \"Student Name\",\n  \"Age\": 20,\n  \"Mark1\": 50,\n  \"Mark2\": 45,\n  \"Mark3\": 50\n}"
+          "raw": "{\n  \"name\": \"Student Name\",\n  \"age\": 20,\n  \"mark1\": 50,\n  \"mark2\": 45,\n  \"mark3\": 50\n}"
         }
       }
     },

@@ -47,11 +47,11 @@ test("studentResultByIdController handles not found", async () => {
 test("studentResultByIdController returns payload", async () => {
   jest.resetModules();
   const getStudentResultById = jest.fn(async () => ({
-    Name: "Student",
-    Mark1: 50,
-    Mark2: 50,
-    Mark3: 50,
-    Result: "Passed",
+    name: "Student",
+    mark1: 50,
+    mark2: 50,
+    mark3: 50,
+    result: "passed",
   }));
 
   jest.unstable_mockModule(

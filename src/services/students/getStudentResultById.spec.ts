@@ -60,10 +60,10 @@ test("getStudentResultById returns result payload", async () => {
   const isValid = jest.fn(() => true);
   const findById = jest.fn(() => ({
     exec: jest.fn(async () => ({
-      Name: "Student",
-      Mark1: 50,
-      Mark2: 50,
-      Mark3: 50,
+      name: "Student",
+      mark1: 50,
+      mark2: 50,
+      mark3: 50,
     })),
   }));
 
@@ -87,10 +87,10 @@ test("getStudentResultById returns result payload", async () => {
     .default;
   const result = await getStudentResultById("507f1f77bcf86cd799439011");
   expect(result).toEqual({
-    Name: "Student",
-    Mark1: 50,
-    Mark2: 50,
-    Mark3: 50,
-    Result: "Passed",
+    name: "Student",
+    mark1: 50,
+    mark2: 50,
+    mark3: 50,
+    result: "passed",
   });
 });

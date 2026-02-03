@@ -1,11 +1,11 @@
 import joi from "joi";
 
 const studentSchema = joi.object({
-  Name: joi.string().required().min(6).max(20),
-  Age: joi.number(),
-  Mark1: joi.number().required(),
-  Mark2: joi.number().required(),
-  Mark3: joi.number().required(),
+  name: joi.string().required().min(6).max(20),
+  age: joi.number(),
+  mark1: joi.number().required(),
+  mark2: joi.number().required(),
+  mark3: joi.number().required(),
 });
 
 export default studentSchema;

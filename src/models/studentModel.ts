@@ -1,24 +1,24 @@
 import mongoose, { Schema } from "mongoose";
 
 const studentSchema = new Schema({
-  Name: {
+  name: {
     type: String,
     required: [true, "Please provide the name"],
     minlength: 6,
     maxlength: 20,
   },
-  Age: {
+  age: {
     type: Number,
   },
-  Mark1: {
-    type: Number,
-    required: true,
-  },
-  Mark2: {
+  mark1: {
     type: Number,
     required: true,
   },
-  Mark3: {
+  mark2: {
+    type: Number,
+    required: true,
+  },
+  mark3: {
     type: Number,
     required: true,
   },

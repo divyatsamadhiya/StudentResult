@@ -3,10 +3,10 @@ import { jest } from "@jest/globals";
 test("csvUpload parses and inserts rows and clears cache", async () => {
   jest.resetModules();
   const fromFile = jest.fn(async () => [
-    { Name: "A", Age: "10", Mark1: "40", Mark2: "50", Mark3: "60" },
+    { name: "A", age: "10", mark1: "40", mark2: "50", mark3: "60" },
   ]);
   const csvtojsonMock = jest.fn(() => ({ fromFile }));
-  const insertMany = jest.fn(async () => [{ Name: "A" }]);
+  const insertMany = jest.fn(async () => [{ name: "A" }]);
   const del = jest.fn();
 
   jest.unstable_mockModule("./cache.js", () => ({
@@ -30,13 +30,13 @@ test("csvUpload parses and inserts rows and clears cache", async () => {
   expect(fromFile).toHaveBeenCalled();
   expect(insertMany).toHaveBeenCalledWith([
     {
-      Name: "A",
-      Age: "10",
-      Mark1: "40",
-      Mark2: "50",
-      Mark3: "60",
+      name: "A",
+      age: "10",
+      mark1: "40",
+      mark2: "50",
+      mark3: "60",
     },
   ]);
   expect(del).toHaveBeenCalledWith("students");
-  expect(result).toEqual([{ Name: "A" }]);
+  expect(result).toEqual([{ name: "A" }]);
 });

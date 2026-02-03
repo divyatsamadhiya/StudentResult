@@ -5,7 +5,7 @@ test("addStudentController returns 400 on validation error", async () => {
   const validate = jest.fn(() => ({
     error: { details: [{ message: "bad" }] },
   }));
-  const addStudent = jest.fn(async () => ({ Name: "Student" }));
+  const addStudent = jest.fn(async () => ({ name: "Student" }));
 
   jest.unstable_mockModule("../../validators/studentSchema.js", () => ({
     default: { validate },
@@ -31,7 +31,7 @@ test("addStudentController returns 400 on validation error", async () => {
 test("addStudentController creates student", async () => {
   jest.resetModules();
   const validate = jest.fn(() => ({ error: undefined }));
-  const addStudent = jest.fn(async () => ({ Name: "Student" }));
+  const addStudent = jest.fn(async () => ({ name: "Student" }));
 
   jest.unstable_mockModule("../../validators/studentSchema.js", () => ({
     default: { validate },
@@ -44,7 +44,7 @@ test("addStudentController creates student", async () => {
   }));
 
   const controller = (await import("./addStudentController.js")).default;
-  const req = { body: { Name: "Student" } } as any;
+  const req = { body: { name: "Student" } } as any;
   const res = {
     status: jest.fn().mockReturnThis(),
     send: jest.fn(),

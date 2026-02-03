@@ -2,7 +2,7 @@ import { jest } from "@jest/globals";
 
 test("getResultStatusController returns filtered students", async () => {
   jest.resetModules();
-  const getResultStatus = jest.fn(async () => [{ Mark1: 50 }]);
+  const getResultStatus = jest.fn(async () => [{ mark1: 50 }]);
 
   jest.unstable_mockModule(
     "../../services/students/getResultStatus.js",

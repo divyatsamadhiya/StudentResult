@@ -3,8 +3,8 @@ import { jest } from "@jest/globals";
 test("getResultStatus filters passed", async () => {
   jest.resetModules();
   const find = jest.fn(async () => [
-    { Mark1: 50, Mark2: 50, Mark3: 50 },
-    { Mark1: 40, Mark2: 40, Mark3: 40 },
+    { mark1: 50, mark2: 50, mark3: 50 },
+    { mark1: 40, mark2: 40, mark3: 40 },
   ]);
 
   jest.unstable_mockModule("../../models/studentModel.js", () => ({
@@ -14,14 +14,14 @@ test("getResultStatus filters passed", async () => {
 
   const getResultStatus = (await import("./getResultStatus.js")).default;
   const result = await getResultStatus("passed");
-  expect(result).toEqual([{ Mark1: 50, Mark2: 50, Mark3: 50 }]);
+  expect(result).toEqual([{ mark1: 50, mark2: 50, mark3: 50 }]);
 });
 
 test("getResultStatus filters failed", async () => {
   jest.resetModules();
   const find = jest.fn(async () => [
-    { Mark1: 50, Mark2: 50, Mark3: 50 },
-    { Mark1: 40, Mark2: 40, Mark3: 40 },
+    { mark1: 50, mark2: 50, mark3: 50 },
+    { mark1: 40, mark2: 40, mark3: 40 },
   ]);
 
   jest.unstable_mockModule("../../models/studentModel.js", () => ({
@@ -31,5 +31,5 @@ test("getResultStatus filters failed", async () => {
 
   const getResultStatus = (await import("./getResultStatus.js")).default;
   const result = await getResultStatus("failed");
-  expect(result).toEqual([{ Mark1: 40, Mark2: 40, Mark3: 40 }]);
+  expect(result).toEqual([{ mark1: 40, mark2: 40, mark3: 40 }]);
 });
