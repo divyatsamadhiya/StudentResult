@@ -1,4 +1,5 @@
 import Student from "../../models/studentModel.js";
+import logger from "../../configs/logger.js";
 import studentCache from "./cache.js";
 import { hashPassword } from "../auth/password.js";
 
@@ -11,6 +12,7 @@ const addStudent = async (payload: Record<string, unknown>) => {
   const { password, ...rest } = payload;
   const created = await Student.create({ ...rest, passwordHash });
   studentCache.del("students");
+  logger.info(`Student created ${created.id}`);
   return created;
 };
 

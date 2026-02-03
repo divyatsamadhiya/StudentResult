@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import studentLogin from "../../services/auth/studentLogin.js";
+import logger from "../../configs/logger.js";
 import { loginSchema } from "../../validators/authSchema.js";
 
 const studentLoginController = async (req: Request, res: Response) => {
@@ -15,9 +16,10 @@ const studentLoginController = async (req: Request, res: Response) => {
     if (!result) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
+    logger.info(`Student login response success for ${email}`);
     res.status(200).json(result);
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     res.status(500).json({ message: "Login failed" });
   }
 };

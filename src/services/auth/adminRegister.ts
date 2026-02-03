@@ -1,4 +1,5 @@
 import Admin from "../../models/adminModel.js";
+import logger from "../../configs/logger.js";
 import { hashPassword } from "./password.js";
 
 type RegisterPayload = {
@@ -15,6 +16,7 @@ const adminRegister = async (
     email: payload.email.toLowerCase(),
   }).exec();
   if (existing) {
+    logger.warn(`Admin register conflict for ${payload.email}`);
     return { conflict: true };
   }
 
@@ -24,6 +26,7 @@ const adminRegister = async (
     passwordHash,
   });
 
+  logger.info(`Admin registered ${admin.email}`);
   return { id: admin.id, email: admin.email };
 };
 

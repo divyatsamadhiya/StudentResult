@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import csvtojson from "csvtojson";
 import Student from "../../models/studentModel.js";
+import logger from "../../configs/logger.js";
 import studentCache from "./cache.js";
 import { hashPassword } from "../auth/password.js";
 
@@ -42,6 +43,7 @@ const csvUpload = async () => {
   }
   const inserted = await Student.insertMany(studentArr);
   studentCache.del("students");
+  logger.info(`CSV upload inserted ${inserted.length} students`);
   return inserted;
 };
 

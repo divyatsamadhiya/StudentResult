@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import getStudentResultById from "../../services/students/getStudentResultById.js";
+import logger from "../../configs/logger.js";
 
 const studentResultByIdController = async (req: Request, res: Response) => {
   try {
@@ -12,9 +13,10 @@ const studentResultByIdController = async (req: Request, res: Response) => {
         .status(404)
         .json({ status: "Failed", msg: "Student not found" });
     }
+    logger.info(`studentResultByIdController success ${req.params.id}`);
     res.status(200).json(result);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 };
 

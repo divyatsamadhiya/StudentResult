@@ -1,4 +1,5 @@
 import Student from "../../models/studentModel.js";
+import logger from "../../configs/logger.js";
 
 const getResultStatus = async (search: string | undefined) => {
   let students = await Student.find({});
@@ -11,6 +12,7 @@ const getResultStatus = async (search: string | undefined) => {
       return false;
     }
   );
+  logger.info(`getResultStatus ${search} -> ${students.length} records`);
   return students;
 };
 
