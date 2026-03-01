@@ -1,0 +1,208 @@
+{
+  "info": {
+    "name": "Student Result API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Student Result API"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1"
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    },
+    {
+      "key": "studentToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Admin Register (Bootstrap/Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/admin/register",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "admin", "register"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"secret123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Admin Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/admin/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "admin", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"secret123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Student Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/auth/student/login",
+          "host": ["{{baseUrl}}"],
+          "path": ["auth", "student", "login"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"student@example.com\",\n  \"password\": \"secret123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Add Student (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/students",
+          "host": ["{{baseUrl}}"],
+          "path": ["students"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Student Name\",\n  \"email\": \"student@example.com\",\n  \"password\": \"secret123\",\n  \"age\": 20,\n  \"mark1\": 50,\n  \"mark2\": 45,\n  \"mark3\": 50\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Students (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/allStudents",
+          "host": ["{{baseUrl}}"],
+          "path": ["allStudents"]
+        }
+      }
+    },
+    {
+      "name": "Get Students By Result (Admin, passed)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/students?resultStatus=passed",
+          "host": ["{{baseUrl}}"],
+          "path": ["students"],
+          "query": [
+            {
+              "key": "resultStatus",
+              "value": "passed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Students By Result (Admin, failed)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/students?resultStatus=failed",
+          "host": ["{{baseUrl}}"],
+          "path": ["students"],
+          "query": [
+            {
+              "key": "resultStatus",
+              "value": "failed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Student Result By Id (Student/Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{studentToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/students/:id/result",
+          "host": ["{{baseUrl}}"],
+          "path": ["students", ":id", "result"]
+        }
+      }
+    },
+    {
+      "name": "Upload CSV (Admin)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{adminToken}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/upload",
+          "host": ["{{baseUrl}}"],
+          "path": ["upload"]
+        }
+      }
+    }
+  ]
+}
